@@ -23,17 +23,10 @@ export default class Service {
 
     return (
       (getEucledianDistance(upper[5][0], upper[5][1], lower[4][0], lower[4][1])
-        + getEucledianDistance(
-          upper[3][0],
-          upper[3][1],
-          lower[2][0],
-          lower[2][1],
-        ))
-      / (2
-        * getEucledianDistance(upper[0][0], upper[0][1], upper[8][0], upper[8][1]))
+        + getEucledianDistance(upper[3][0], upper[3][1], lower[2][0], lower[2][1]))
+      / (2 * getEucledianDistance(upper[0][0], upper[0][1], upper[8][0], upper[8][1]))
     )
   }
-
 
   async handBlinked(video) {
     const predictions = await this.#estimateFaces(video)
@@ -50,10 +43,18 @@ export default class Service {
       const upperLeft = prediction.annotations.leftEyeLower0
       const leftEAR = this.#getEAR(upperLeft, lowerLeft)
 
+
       // True if the eye is closed
       const blinked = leftEAR <= EAR_THRESHOLD && rightEAR <= EAR_THRESHOLD
-      if (!blinked) continue
+      const blinkedLeft = leftEAR <= EAR_THRESHOLD && rightEAR >= EAR_THRESHOLD
+      const blinkedRight = leftEAR >= EAR_THRESHOLD && rightEAR <= EAR_THRESHOLD
+
       if (!shouldRun()) continue
+
+      if (blinkedLeft) return 'LEFT'
+      if (blinkedRight) return 'RIGHT'
+
+      if (!blinked) continue
 
       return blinked
     }

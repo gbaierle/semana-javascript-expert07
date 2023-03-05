@@ -3,6 +3,8 @@ export default class Controller {
   #camera
   #worker
   #blinkCounter = 0
+  #leftBlinkCounter = 0
+  #rightBlinkCounter = 0
   constructor({ view, worker, camera }) {
     this.#view = view
     this.#camera = camera
@@ -26,10 +28,26 @@ export default class Controller {
         ready = true
         return
       }
+
       const blinked = data.blinked
-      this.#blinkCounter += blinked
-      this.#view.togglePlayVideo()
-      console.log('blinked', blinked)
+      console.log('blinked ', blinked)
+
+      switch (blinked) {
+        case 'LEFT':
+          this.#view.backwardVideo()
+          this.#leftBlinkCounter++
+          break
+
+        case 'RIGHT':
+          this.#view.forwardVideo()
+          this.#rightBlinkCounter++
+          break
+
+        default:
+          this.#view.togglePlayVideo()
+        }
+
+        this.#blinkCounter++
     }
 
     return {
@@ -52,8 +70,14 @@ export default class Controller {
     setTimeout(() => this.loop(), 100)
   }
   log(text) {
-    const times = `      - blinked times: ${this.#blinkCounter}`
-    this.#view.log(`status: ${text}`.concat(this.#blinkCounter ? times : ""))
+    const counter = `      - blinked times: ${this.#blinkCounter}`
+    const leftCounter = `      - left blinks: ${this.#leftBlinkCounter}`
+    const rightBlinkCounter = `      - right blinks: ${this.#rightBlinkCounter}`
+    this.#view.log(`status: ${text}`
+      .concat(this.#blinkCounter ? counter : "")
+      .concat(this.#blinkCounter ? leftCounter : "")
+      .concat(this.#blinkCounter ? rightBlinkCounter : "")
+    )
   }
 
   onBtnStart() {
