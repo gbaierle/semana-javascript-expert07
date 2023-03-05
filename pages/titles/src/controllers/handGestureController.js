@@ -2,6 +2,8 @@ import { prepareRunChecker } from "../../../../lib/utils.js"
 
 const { shouldRun: scrollShouldRun } = prepareRunChecker({ timerDelay: 200 })
 const { shouldRun: clickShouldRun } = prepareRunChecker({ timerDelay: 300 })
+const { shouldRun: searchShouldRun } = prepareRunChecker({ timerDelay: 500 })
+
 export default class HandGestureController {
   #view
   #service
@@ -51,6 +53,13 @@ export default class HandGestureController {
           continue
         }
 
+        if (event === 'search') {
+          if (!searchShouldRun()) continue
+          this.#view.search()
+
+          continue
+        }
+
         if (event.includes('scroll')) {
           if (!scrollShouldRun()) continue
           this.#scrollPage(event)
@@ -66,8 +75,8 @@ export default class HandGestureController {
     await this.#service.initializeDetector()
     await this.#estimateHands()
     this.#view.loop(this.#loop.bind(this))
-
   }
+
   static async initialize(deps) {
     const controller = new HandGestureController(deps)
     return controller.init()

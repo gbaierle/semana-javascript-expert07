@@ -3,6 +3,7 @@ const { GestureDescription, Finger, FingerCurl } = window.fp;
 const ScrollDownGesture = new GestureDescription("scroll-down"); // ✊️
 const ScrollUpGesture = new GestureDescription("scroll-up"); // 🖐
 const ClickGesture = new GestureDescription("click"); // 🤏🏻
+const SearchGesture = new GestureDescription("search"); // 🤘
 
 // Scroll Down
 // -----------------------------------------------------------------------------
@@ -43,12 +44,34 @@ ClickGesture.addCurl(Finger.Ring, FingerCurl.FullCurl, 0.9);
 ClickGesture.addCurl(Finger.Pinky, FingerCurl.HalfCurl, 1.0);
 ClickGesture.addCurl(Finger.Pinky, FingerCurl.FullCurl, 0.9);
 
-const knownGestures = [ScrollDownGesture, ScrollUpGesture, ClickGesture];
+// Search
+// -----------------------------------------------------------------------------
+SearchGesture.addCurl(Finger.Index, FingerCurl.NoCurl, 0.9)
+
+SearchGesture.addCurl(Finger.Thumb, FingerCurl.NoCurl, 0.9)
+SearchGesture.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 0.5)
+
+SearchGesture.addCurl(Finger.Middle, FingerCurl.FullCurl, 0.9)
+SearchGesture.addCurl(Finger.Middle, FingerCurl.HalfCurl, 0.5)
+
+SearchGesture.addCurl(Finger.Ring, FingerCurl.FullCurl, 0.9)
+SearchGesture.addCurl(Finger.Ring, FingerCurl.HalfCurl, 0.5)
+
+SearchGesture.addCurl(Finger.Pinky, FingerCurl.NoCurl, 0.9)
+SearchGesture.addCurl(Finger.Pinky, FingerCurl.HalfCurl, 0.5)
+
+const knownGestures = [
+  ScrollDownGesture,
+  ScrollUpGesture,
+  ClickGesture,
+  SearchGesture
+];
 
 const gestureStrings = {
   "scroll-up": "🖐",
   "scroll-down": "✊️",
   click: "🤏🏻",
+  search: "🤘",
 };
 
 export { knownGestures, gestureStrings };

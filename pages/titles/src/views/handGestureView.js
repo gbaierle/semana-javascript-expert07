@@ -28,7 +28,7 @@ export default class HandGestureView {
 
       this.#canvasContext.fillStyle =
         handedness === 'Left' ? 'rgb(44, 212, 103)' : 'rgb(44, 212, 103)';
-      this.#canvasContext.strokeStyle = 'white';
+      this.#canvasContext.strokeStyle = 'lightgray';
       this.#canvasContext.lineWidth = 8;
       this.#canvasContext.lineJoin = 'round';
 
@@ -55,6 +55,12 @@ export default class HandGestureView {
     element.dispatchEvent(event);
   }
 
+  search() {
+    window.SmoothScroll('search')
+    let input = document.getElementById('inputSearch')
+    input.focus()
+  }
+
   #drawJoients(keypoints) {
     for (const { x, y } of keypoints) {
       this.#canvasContext.beginPath();
@@ -68,6 +74,7 @@ export default class HandGestureView {
       this.#canvasContext.fill();
     }
   }
+
   #drawFingersAndHoverElements(keypoints) {
     const fingers = Object.keys(this.#fingerLookupIndexes);
     for (const finger of fingers) {
