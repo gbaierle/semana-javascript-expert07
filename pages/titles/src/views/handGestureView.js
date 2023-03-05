@@ -55,10 +55,10 @@ export default class HandGestureView {
     element.dispatchEvent(event);
   }
 
-  search() {
+  focusSearch() {
     window.SmoothScroll('search')
     let input = document.getElementById('inputSearch')
-    input.focus()
+    if (input) input.focus()
   }
 
   #drawJoients(keypoints) {

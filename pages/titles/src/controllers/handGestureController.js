@@ -55,7 +55,7 @@ export default class HandGestureController {
 
         if (event === 'search') {
           if (!searchShouldRun()) continue
-          this.#view.search()
+          this.#view.focusSearch()
 
           continue
         }
