@@ -7,6 +7,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JSExpert Max - BlinkToPlay</title>
   <style>
+    #hands {
+      position: fixed;
+      pointer-events: none;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 12;
+    }
+
     video {
       width: 95%;
       margin: 10px;
@@ -24,6 +34,7 @@
 </head>
 
 <body>
+  <canvas id="hands"></canvas>
   <div class="button-container">
     <div>
       <button type="button" disabled id="init"> Initialize Blink Recognition</button>
@@ -32,6 +43,7 @@
   </div>
   <video id="video" src="/assets/video.mp4" controls></video>
   <script src="./src/index.js" type="module"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/TSedlar/pseudo-styler@1.0.8/pseudostyler.js"></script>
 </body>
 
 </html>
