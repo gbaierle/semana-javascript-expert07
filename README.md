@@ -30,7 +30,7 @@ O template inicial e código das aulas está disponível [neste repositório](ht
   - [x] - Todo processamento de Machine Learning deve ser feito via Web worker
 
 ### Desafios / extra features
-- Utilizando o gesto "" é possível focar no campo de busca
+- Utilizando o gesto 🤘 é possível focar no campo de busca
 - Usar as mãos virtuais também no Video Player
 - Diferenciar piscada de olhos entre olho direito e esquerdo
   - Piscando com o olho direito o video avança 5s
